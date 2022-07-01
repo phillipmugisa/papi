@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from "react-router-dom";
+
 import { SelectorContext } from "./selectorContext.jsx";
 import Header from "../components/header";
 import SideBar from "../components/sideBar";
@@ -18,29 +23,15 @@ const Layout = () => {
                 <SelectorContext>
                     <SideBar />
                     <div className="main">
-                        <Switch>
-                            {/* <Route path="/" exact>
-                                <HomePage />
-                            </Route> */}
-                            <Route path="/news">
-                                <News />
-                            </Route>
-                            <Route path="/tasks">
-                                <Tasks />
-                            </Route>
-                            <Route path="/createTask">
-                                <CreateTask />
-                            </Route>
-                            <Route path="/editTask/:id">
-                                <EditTask />
-                            </Route>
-                            <Route path="/account">
-                                <Profile />
-                            </Route>
-                            <Route path="/edit-profile">
-                                <EditProfile />
-                            </Route>
-                        </Switch>
+                        <Routes>
+                            {/* <Route path={`/`} exact element={<HomePage />} /> */}
+                            <Route path="/news" exact element={<News />} />
+                            <Route path="/tasks"  exact element={<Tasks />} />
+                            <Route path="/createTask"  exact element={<CreateTask />} />
+                            <Route path="/editTask/:id"  exact element={<EditTask />} />
+                            <Route path="/account"  exact element={<Profile />} />
+                            <Route path="/edit-profile"  exact element={<EditProfile />} />
+                        </Routes>
                     </div>
                 </SelectorContext>
             </section>

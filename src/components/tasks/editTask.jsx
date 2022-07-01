@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 
 const EditTask = () => {
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [ isLoading, setIsLoading ] = useState(true)
 
@@ -39,7 +39,7 @@ const EditTask = () => {
             headers: {"Content-type" : "application/json"},
             body: JSON.stringify({ taskName, taskNotes, taskCategory, taskDueDate })
         })
-        .then(() => history.push("/tasks"))
+        .then(() => navigate("/tasks"))
         .catch(err => console.log(err))
 
     }

@@ -7,7 +7,7 @@ const SelectorContext = (props) => {
     const [ sourceToShow, setSourceToShow ] = useState("All")
 
     useEffect(() => {
-        console.log(`SelectorContext : catToShow: ${catToShow}, sourceToShow: ${sourceToShow}`)
+        // console.log(`SelectorContext : catToShow: ${catToShow}, sourceToShow: ${sourceToShow}`)
     }, [catToShow, sourceToShow])
 
     return (

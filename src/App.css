@@ -30,6 +30,18 @@ body.light {
   background: var(--backgroundColor);
 }
 
+.msg {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+body.dark .msg{
+  color: white;
+}
+body.light .msg{
+  color: black;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -75,7 +87,7 @@ a {
 }
 
 .boxSolid {
-  box-shadow: 1px 2px 2px 2px var(--boxShadowColor);
+  box-shadow: 1px 1px 2px 2px var(--boxShadowColor);
 }
 
 body.dark .btn-primary:hover {
@@ -142,8 +154,8 @@ header .logo .start-letter {
   width: 70%;
   margin: 2% auto;
   display: grid;
-  grid-template-columns: 1fr 2.5fr;
-  grid-gap: 1rem;
+  grid-template-columns: 1fr 3fr;
+  gap: 1rem;
 }
 
 .body-container .main {
@@ -180,14 +192,17 @@ header .logo .start-letter {
 }
 
 .sidebar .theme-change-switch {
-  width: 4rem;
-  height: 1.5rem;
   border-radius: 15px;
   background-color: var(--whiteColor);
   box-shadow: .3px .3px .3px 1px var(--boxShadowColor), inset 2px 2px 2px 1px rgba(211, 205, 205, 0.822);
   padding: 0.1rem 1rem;
   overflow: hidden;
+  display: grid;
+  width: 60px;
+  aspect-ratio: 2/1;
+  align-items: center;
   position: relative;
+  transition: all .3s;
 }
 
 body.dark .sidebar .theme-change-switch {
@@ -195,18 +210,26 @@ body.dark .sidebar .theme-change-switch {
 }
 
 .sidebar .theme-change-switch-ball {
-  background: rgba(33, 34, 34, 0.925);
-  width: 1.3rem;
-  height: 1.2rem;
-  border-radius: 10px;
+  background: rgba(61, 65, 65, 0.925);
+  height: 80%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
   position: absolute;
+  margin-inline: .25rem;
 }
 
-.sidebar .theme-change-switch-ball.light {left: 5px;right: none;}
+body.light .sidebar .theme-change-switch.light  {
+  justify-items: flex-start;
+}
+body.dark .sidebar .theme-change-switch  {
+  justify-items: flex-end;
+}
+
+/* .sidebar .theme-change-switch-ball.light {left: 5px;right: none;}
 .sidebar .theme-change-switch-ball.dark {left: none;right: 5px;}
 
 .sidebar .theme-change-switch-ball.light {left: 5px;right: none;}
-.sidebar .theme-change-switch-ball.dark {left: none;right: 5px;}
+.sidebar .theme-change-switch-ball.dark {left: none;right: 5px;} */
 
 .category-select-field {
   padding: 3% 5%;
@@ -259,27 +282,31 @@ body.dark .sidebar .theme-change-switch {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-content: center;
-  grid-row-gap: 2rem;
-  grid-column-gap: 2rem;
+  gap: 1rem;
   align-items: flex-start;
 }
 
 .newscard {
   overflow: hidden;
   border-radius: 5px;
+  display: grid;
+  max-block-size: 70vh;
 }
 
 .newscard .card-image {
-  width: 20rem;
-  height: 15rem;
+  width: 100%;
+  aspect-ratio: 16/10;
   overflow: hidden;
   position: relative;
+  object-fit: cover;
+  display: flex;
+  justify-content: stretch;
 }
 
 .newscard .card-image::after {
   content: "";
-  width: 20rem;
-  height: 15rem;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -302,26 +329,29 @@ body.dark .sidebar .theme-change-switch {
 .newscard .card-body {
   padding: 5% 5%;
   display: grid;
-  grid-template-columns: 2fr 2fr .5fr;
-  grid-gap: .3rem;
+  gap: .75rem;
+  line-height: 20px;
 }
 
 .newscard .card-body .card-head {
-  line-height: 1.2rem;
-  font-size: .8rem;
+  font-size: 1rem;
   color: var(--blackColor);
-  grid-column: 1/3;
-  padding-right: .3rem;
+  font-weight: 500;
+  /* padding-right: .3rem; */
 }
 
 .newscard .card-body .card-body-sub {
   padding: 2% 0;
-  grid-column: 1/3;
+}
+
+.newscard .description {
+  color: var(--greyColor);
+  overflow: hidden;
 }
 
 .newscard .card-icons {
-  grid-column: 3/4;
-  grid-row: 1/3;
+  /* grid-column: 3/4;
+  grid-row: 1/3; */
   align-items: center;
 }
 
@@ -486,7 +516,12 @@ body.dark .sidebar .theme-change-switch {
 }
 
 .edit-profile .form-fields label {
-  color: var(--greyColor)
+  color: var(--greyColor);
+  cursor: pointer;
+}
+
+input[type='radio'] {
+  cursor: pointer;
 }
 
 .edit-profile .form-fields input:not(.btn-primary),
@@ -521,13 +556,13 @@ body.dark .sidebar .theme-change-switch {
   .body-container {
     width: 80%;
   }
-  .newscard .card-image {
+  /* .newscard .card-image {
     width: 15rem;
     height: 12.5rem;
   }
   .newscard .card-body {
     grid-gap: 0rem;
-  }
+  } */
 }
 
 @media screen and (max-width: 900px) {
@@ -542,11 +577,11 @@ body.dark .sidebar .theme-change-switch {
   .homepage {
     grid-template-columns: 1fr;
   }
-  .newscard .card-image {
+  /* .newscard .card-image {
     width: 100%;
     height: 12.5rem;
   }
   .newscard .card-body {
     grid-gap: 0rem;
-  }
+  } */
 }

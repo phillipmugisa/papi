@@ -9,24 +9,44 @@ const SideBar = () => {
         sourceToShow, setSourceToShow
     } = useContext(SelectorProvider)
 
-    const categories = ["All", "Technology", "Sports", "World"];
-    const sources = ["All", "Google News", "Bing", "New York Times"];
+    const categories = ["All", "Technology", "Sports", "Finance"];
+    const sources = ["All", "Google News", "Yahoo News", "New York Times"];
 
-    const theme = useRef("light")
+    const togglebtn = useRef("togglebtn")
+
+    const toggleTheme =() => {
+        const theme = localStorage.getItem('theme');
+        togglebtn.current.classList.remove(theme)
+        document.body.classList = theme
+        if (theme === 'dark')
+        {
+            localStorage.setItem('theme', 'light')
+        }
+        else
+        {
+            localStorage.setItem('theme', 'dark')
+        }
+        // togglebtn.current.classList.add(theme.current)
+        document.body.classList = localStorage.getItem('theme')
+        togglebtn.current.classList.add(localStorage.getItem('theme'))
+    }
 
     useEffect(() => {
-        const themeChangeSwitchBall = document.querySelector('.theme-change-switch-ball')
-        themeChangeSwitchBall.classList.add(theme.current)
-        document.body.classList = theme.current
-        
-        const script = document.createElement('script')
-        script.src = './scripts/script.js'
-        script.async = true
-        document.body.appendChild(script)
 
-        return () => {
-            document.body.removeChild(script)
+        // get theme
+        if (!localStorage.getItem('theme'))
+        {
+            localStorage.setItem('theme', 'light')
         }
+
+        togglebtn.current.classList.add(localStorage.getItem('theme'))
+        document.body.classList = localStorage.getItem('theme')
+        
+        togglebtn.current.addEventListener('click', toggleTheme)
+
+        // return () => {
+        //     togglebtn.current.removeEventListener('click', toggleTheme);
+        // }
 
     }, [catToShow, sourceToShow])
 
@@ -34,7 +54,7 @@ const SideBar = () => {
         <div className="sidebar boxSolid">
             <div className="theme-change">
                 <span>Light</span>
-                <div className="theme-change-switch">
+                <div className="theme-change-switch" ref={togglebtn}>
                     <div className="theme-change-switch-ball"></div>
                 </div>
                 <span>Dark</span>
@@ -78,9 +98,9 @@ const CategoryFields = ({selected, dataArr, setFunc}) => {
                     return (
                         <div className="category" key={data}>
                             <input type="radio" name='source' 
-                                value={data} id={data} 
-                                onClick={() => setFunc(data)}
+                                value={data} id={data}
                                 checked = { selected === data ? true : false }
+                                onChange={() => {setFunc(data)}}
                             />
                             <label htmlFor={data}>{data}</label>
                         </div>

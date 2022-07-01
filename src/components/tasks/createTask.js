@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 
 const CreateTask = () => {
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [ taskData, setTaskdata ] = useState({
         taskName: "",
@@ -45,7 +45,7 @@ const CreateTask = () => {
             headers: {"Content-type" : "application/json"},
             body: JSON.stringify({...taskData})
         })
-        .then(() => history.push("/tasks"))
+        .then(() => navigate("/tasks"))
         .catch(err => console.log(err))
 
     }
