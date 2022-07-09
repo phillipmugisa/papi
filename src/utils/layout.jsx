@@ -11,8 +11,8 @@ import News from "../pages/news";
 import Tasks from "../pages/tasks";
 import CreateTask from '../components/tasks/createTask.js';
 import EditTask from '../components/tasks/editTask';
-import Profile from "../components/user/profile";
-import EditProfile from "../components/user/editProfile";
+// import Profile from "../components/user/profile";
+// import EditProfile from "../components/user/editProfile";
 
 const Layout = () => {
 
@@ -29,8 +29,8 @@ const Layout = () => {
                             <Route path="/tasks"  exact element={<Tasks />} />
                             <Route path="/createTask"  exact element={<CreateTask />} />
                             <Route path="/editTask/:id"  exact element={<EditTask />} />
-                            <Route path="/account"  exact element={<Profile />} />
-                            <Route path="/edit-profile"  exact element={<EditProfile />} />
+                            {/* <Route path="/account"  exact element={<Profile />} /> */}
+                            {/* <Route path="/edit-profile"  exact element={<EditProfile />} /> */}
                         </Routes>
                     </div>
                 </SelectorContext>

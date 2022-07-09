@@ -1,14 +1,12 @@
-import { useRef, useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { SelectorProvider } from './selectorContext'
 
-const useFetchNews = (url) => {
-
-    const visitedRoutes = useRef([]);
-    const [pageNum, setPageNum] = useState(1);
+const useFetchNews = (pageNum) => {
     const [news, setNews] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [err, setErr] = useState(false);
-    // const urlQueryParams = useRef({category: null, source: null});
+    const [hasNext, setHasNext] = useState(true);
+    const [maxPages, setMaxPages] = useState(2);
     
     const {
         catToShow, sourceToShow,
@@ -16,7 +14,7 @@ const useFetchNews = (url) => {
 
     const BACKEND_URL = 'http://localhost:8000';
 
-    const getNews = async () => {
+    const getNews = async (pageNum) => {
         try{
             let url = '';
             if (catToShow !== "All" && sourceToShow !== "All")
@@ -35,51 +33,29 @@ const useFetchNews = (url) => {
             {
                 url = `${BACKEND_URL}/news/?page=${pageNum}`;
             }
-	
-		console.log(visitedRoutes.current.includes(url))
-		if (visitedRoutes.current.includes(url))
-		{
-			return;
-		}
-		else
-		{
-//			visitedRoutes.push(url)
-		}
 
             const response = await fetch(url, {
                 method: "GET",
                 mode: "cors",
                 cache: "no-cache",
             })
-            if (!response.ok) {
-                window.scrollTo(0, 0);
-            }
-            return response
+            return response;
             
         } catch (err) {
             throw new Error(err);
         }
     }
 
-    const loadMore = () => {
-        if ((window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100))
-        {  
-            // console.log("loading")
-            setPageNum(pageNum => (pageNum + 1));
-            updateNews()
-        }
-      //  else
-    //    {
-  //          setPageNum(1);
-//        }
-        
-    }
+    const updateNews = (pageNum) => {
+        if (!hasNext) return;
+        if (pageNum > maxPages) return;
 
-    const updateNews = () => {
-        getNews()
+        getNews(pageNum)
         .then((response) => {
             response.json()
             .then((jsonData) => {
+                setHasNext(jsonData['next']);
+                setMaxPages(jsonData['total_pages'])
                 news ? setNews(data => {
                     data = data.filter(obj => {
                         if (catToShow !== "All" && sourceToShow !== "All")
@@ -96,30 +72,21 @@ const useFetchNews = (url) => {
                         }
                         return true;
                     })
-                    return [...news, ...jsonData['results']].filter(obj => {
-			for (let a of news)
-			    {
-				if (a.id === obj.id) {return false;}
-				    else {return true};
-			    }
-		    });
+                    return [...data, ...jsonData['results']];
                 }) : setNews(() => [...jsonData['results']])
                 setIsLoading(false);
             })
         })
         .catch((err) => {
-            // console.error(err)
             setErr(true)
         })
     }
 
     useEffect(() => {
-        updateNews()
-        window.addEventListener("scroll", loadMore)
-        return () => window.removeEventListener("scroll", loadMore);
-    },[catToShow, sourceToShow, news])
+        updateNews(pageNum);
+    }, [catToShow, sourceToShow, pageNum])
 
-    return { news, isLoading, err };
+    return { news, isLoading, err, hasNext };
 
 }
 

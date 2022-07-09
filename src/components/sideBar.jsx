@@ -80,7 +80,7 @@ const SideBar = () => {
                 </div>
                 <div className="sidebar-logout-section">
                     <Link to="/logout">
-                        <button className="logout-button btn-primary">Logout</button>
+                        <button className="logout-button btn-primary">Login</button>
                     </Link>
                 </div>
             </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NewsCard = ({title, url, description, img_url, category, source}) => {
+const NewsCard = ({title, url, description, img_url, category, source, id}) => {
     return (
-        <div className="newscard boxSolid">
+        <div className="newscard boxSolid" id={id}>
             {img_url && 
                 <a href={ url } target="_blank" rel="noopener noreferrer">
                     <div className="card-image">

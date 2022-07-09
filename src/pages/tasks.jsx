@@ -16,8 +16,9 @@ const Tasks = () => {
 
     return ( 
         <div className="tasks">
-            { isLoading && <h3>Loading Tasks...</h3> }
-            { noTasksFound && <h3>Opps!! No Tasks Found...</h3> }
+            { !tasks && isLoading && <h3 className="msg">Loading Tasks...</h3> }
+            { tasks && tasks.length < 0 && <h3 className="msg">No Tasks Found☹..</h3> }
+            { noTasksFound && <h3 className="msg">Opps!! No Tasks Found...</h3> }
             {
                 tasks && tasks.map(task => {
                     return (

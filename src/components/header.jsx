@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useLocation } from 'react-router-dom';
 
+import { FaStickyNote } from "react-icons/fa";
+
 const Header = () => {
 
     const tabs = [
@@ -38,11 +40,13 @@ const Header = () => {
                     </div>
                     <div className="right-tabs">
                         <Link to="/createTask">
-                            { location.pathname === "/tasks" ? <li id="createTask"><i className="ti-plus"></i></li>  : null}
+                            { location.pathname === "/tasks" ? <li id="createTask">
+                                <FaStickyNote />
+                                </li>  : null}
                         </Link>
-                        <Link to="/account">
+                        {/* <Link to="/account">
                             <li className={ location.pathname === '/account' ? 'active' : null } >Account</li>
-                        </Link>
+                        </Link> */}
                     </div>
                 </ul>
             </nav>
