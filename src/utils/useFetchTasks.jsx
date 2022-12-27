@@ -1,21 +1,10 @@
 import { useState, useEffect } from 'react';
 
-const BACKEND_URL = 'http://localhost:8000';
-
 const useFetchTasks = () => {
 
     const [ tasks, setTasks ] = useState(null)
     const [ noTasksFound, setNoTasksFound ] = useState(false)
     const [ isLoading, setIsLoading ] = useState(true)
-
-    const taskDetail = async (id) => {
-        // const response = await fetch(`${BACKEND_URL}/tasks/${id}`);
-        // if (response.ok)
-        // {
-        //     const jsonData = await response.json();
-        //     return jsonData;
-        // }
-    }
 
     const completeTask = async id => {
 
@@ -68,7 +57,9 @@ const useFetchTasks = () => {
         else
         {
             localStorage.setItem('tasks', []);
-            setTasks([]);
+            setTasks({});
+            setNoTasksFound(true)
+            setIsLoading(false)
         }
 
         // try {

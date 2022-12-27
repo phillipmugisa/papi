@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { SelectorProvider } from "../utils/selectorContext";
 
 const SideBar = () => {
@@ -78,11 +77,11 @@ const SideBar = () => {
                         <CategoryFields selected={sourceToShow} dataArr={sources}  setFunc={setSourceToShow}/>
                     </form>
                 </div>
-                <div className="sidebar-logout-section">
+                {/* <div className="sidebar-logout-section">
                     <Link to="/logout">
                         <button className="logout-button btn-primary">Login</button>
                     </Link>
-                </div>
+                </div> */}
             </div>
         </div>
     );

@@ -24,13 +24,10 @@ const Layout = () => {
                     <SideBar />
                     <div className="main">
                         <Routes>
-                            {/* <Route path={`/`} exact element={<HomePage />} /> */}
-                            <Route path="/news" exact element={<News />} />
+                            <Route path="/" exact element={<News />} />
                             <Route path="/tasks"  exact element={<Tasks />} />
                             <Route path="/createTask"  exact element={<CreateTask />} />
                             <Route path="/editTask/:id"  exact element={<EditTask />} />
-                            {/* <Route path="/account"  exact element={<Profile />} /> */}
-                            {/* <Route path="/edit-profile"  exact element={<EditProfile />} /> */}
                         </Routes>
                     </div>
                 </SelectorContext>

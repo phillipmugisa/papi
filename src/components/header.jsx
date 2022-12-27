@@ -6,8 +6,8 @@ import { FaStickyNote } from "react-icons/fa";
 const Header = () => {
 
     const tabs = [
-        { name: "Home", path: "/"},
-        { name: "News", path: "/news"},
+        // { name: "Home", path: "/"},
+        { name: "News", path: "/"},
         { name: "Tasks", path: "/tasks"},
     ]
 

@@ -84,7 +84,7 @@ const useFetchNews = (pageNum) => {
 
     useEffect(() => {
         updateNews(pageNum);
-    }, [catToShow, sourceToShow, pageNum])
+    }, [catToShow, sourceToShow, pageNum, updateNews])
 
     return { news, isLoading, err, hasNext };
 
