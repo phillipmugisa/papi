@@ -46,7 +46,7 @@ const useFetchNews = (pageNum) => {
         }
     }
 
-    const updateNews = (pageNum) => {
+    const updateNews = useCallback((pageNum) => {
         if (!hasNext) return;
         if (pageNum > maxPages) return;
 
@@ -80,10 +80,10 @@ const useFetchNews = (pageNum) => {
         .catch((err) => {
             setErr(true)
         })
-    }
+    }, [pageNum])
 
     useEffect(() => {
-        useCallback(() => updateNews(pageNum), [])
+        updateNews(pageNum);
     }, [catToShow, sourceToShow, pageNum])
 
     return { news, isLoading, err, hasNext };
