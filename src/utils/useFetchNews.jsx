@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { SelectorProvider } from './selectorContext'
 
 const useFetchNews = (pageNum) => {
@@ -83,8 +83,8 @@ const useFetchNews = (pageNum) => {
     }
 
     useEffect(() => {
-        updateNews(pageNum);
-    }, [catToShow, sourceToShow, pageNum, updateNews])
+        useCallback(() => updateNews(pageNum), [])
+    }, [catToShow, sourceToShow, pageNum])
 
     return { news, isLoading, err, hasNext };
 
