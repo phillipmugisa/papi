@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useCallback } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { SelectorProvider } from './selectorContext'
 
 const useFetchNews = (pageNum) => {
@@ -46,7 +46,7 @@ const useFetchNews = (pageNum) => {
         }
     }
 
-    const updateNews = useCallback((pageNum) => {
+    const updateNews = (pageNum) => {
         if (!hasNext) return;
         if (pageNum > maxPages) return;
 
@@ -80,7 +80,7 @@ const useFetchNews = (pageNum) => {
         .catch((err) => {
             setErr(true)
         })
-    }, [pageNum])
+    }
 
     useEffect(() => {
         updateNews(pageNum);
