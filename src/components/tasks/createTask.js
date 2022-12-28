@@ -62,7 +62,7 @@ const CreateTask = () => {
         
 
 
-        // const response = await fetch("http://localhost:8000/tasks/", {
+        // const response = await fetch("http://129.151.163.59/tasks/", {
         //     method: 'POST',
         //     headers: {"Content-type" : "application/json"},
         //     body: JSON.stringify({...taskData})

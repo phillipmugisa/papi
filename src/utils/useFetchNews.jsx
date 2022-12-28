@@ -12,7 +12,7 @@ const useFetchNews = (pageNum) => {
         catToShow, sourceToShow,
     } = useContext(SelectorProvider)
 
-    const BACKEND_URL = 'http://localhost:8000';
+    const BACKEND_URL = 'http://129.151.163.59';
 
     
     useEffect(() => {
