@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Tasks = () => {
 
     const {
-        tasks, noTasksFound,
+        tasks,
         isLoading, completeTask,
         deleteTask
     } = useFetchTasks();
@@ -14,12 +14,11 @@ const Tasks = () => {
     return ( 
         <div className="tasks">
             { !tasks && isLoading && <h3 className="msg">Loading Tasks...</h3> }
-            { tasks && tasks.length <= 0 && <h3 className="msg" style={{border: "none"}}>
+            { tasks && tasks.length <= 0 && <h3 className="msg" style={{border: "none",justifySelf: "center"}}>
                 <Link to="/createTask">
                     <button className="logout-button btn-primary">Create a Task</button>
                 </Link>
             </h3> }
-            { noTasksFound && <h3 className="msg">Opps!! No Tasks Found...</h3> }
             {
                 tasks && tasks.map(task => {
                     return (

@@ -33,7 +33,7 @@ const News = () => {
             <div className="msg-area">
                 { !news && !err && isLoading && <h3 className="msg">Loading News...</h3> }
                 { news && news.length === 0 && <h3 className="msg">No News Articles Found ☹</h3> }
-                { !news && err && <h3 className="msg">Problem reaching server☹</h3> }
+                { !news && err && <h3 className="msg">Problem reaching server ☹</h3> }
             </div>
             <div className="news" ref={lastArticle}>
                 { news && 

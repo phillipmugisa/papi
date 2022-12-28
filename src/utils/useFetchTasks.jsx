@@ -57,7 +57,7 @@ const useFetchTasks = () => {
         else
         {
             localStorage.setItem('tasks', []);
-            setTasks({});
+            setTasks([]);
             setNoTasksFound(true)
             setIsLoading(false)
         }
