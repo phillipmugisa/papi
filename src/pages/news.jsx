@@ -7,7 +7,8 @@ const News = () => {
     const [pageNum, setPageNum] = useState(1);
     const { 
         news, isLoading, 
-        err, hasNext
+        err, hasNext,
+        maxPages
     } = useFetchNews(pageNum);
     
     const observer = useRef();
@@ -15,7 +16,7 @@ const News = () => {
 
     useEffect(() => {
         observer.current = new IntersectionObserver((entries, observer) => {                
-                if (!isLoading && (entries[0].isIntersecting && hasNext)) {
+                if (!isLoading && (entries[0].isIntersecting && hasNext) && prevPageNumber < maxPages) {
                     setTimeout(
                         setPageNum(prevPageNumber => prevPageNumber + 1),
                         10000
@@ -26,7 +27,7 @@ const News = () => {
         if (lastArticle.current.lastChild) observer.current.observe(lastArticle.current.lastChild);
 
         // return () => observer.current.disconnect();
-    },[pageNum, hasNext, isLoading])
+    },[pageNum, hasNext, isLoading, maxPages])
 
     return (
         <>

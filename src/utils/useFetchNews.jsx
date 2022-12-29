@@ -12,7 +12,7 @@ const useFetchNews = (pageNum) => {
         catToShow, sourceToShow,
     } = useContext(SelectorProvider)
 
-    const BACKEND_URL = 'http://129.151.163.59';
+    const BACKEND_URL = 'https://app.ilazy.net';
 
     
     useEffect(() => {
@@ -57,7 +57,7 @@ const useFetchNews = (pageNum) => {
                 response.json()
                 .then((jsonData) => {
                     setHasNext(jsonData['next']);
-                    setMaxPages(jsonData['total_pages'])
+                    setMaxPages(parseInt(jsonData['count']) / 10)
                     news ? setNews(data => {
                         data = data.filter(obj => {
                             if (catToShow !== "All" && sourceToShow !== "All")
@@ -86,7 +86,7 @@ const useFetchNews = (pageNum) => {
         updateNews(pageNum)
     }, [catToShow, sourceToShow, pageNum, maxPages, hasNext, news])
 
-    return { news, isLoading, err, hasNext };
+    return { news, isLoading, err, hasNext, maxPages };
 
 }
 
