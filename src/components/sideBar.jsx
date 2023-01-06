@@ -74,7 +74,7 @@ const SideBar = () => {
                 </div>
                 <div className="categories">
                     <form>
-                        <CategoryFields selected={sourceToShow} dataArr={sources}  setFunc={setSourceToShow}/>
+                        <CategoryFields selected={sourceToShow} dataArr={sources}  setFunc={setSourceToShow} disabled={true} />
                     </form>
                 </div>
                 {/* <div className="sidebar-logout-section">
@@ -88,7 +88,7 @@ const SideBar = () => {
 }
 
 
-const CategoryFields = ({selected, dataArr, setFunc}) => {
+const CategoryFields = ({selected, dataArr, setFunc, disabled}) => {
     
     return (
         <>
@@ -100,6 +100,7 @@ const CategoryFields = ({selected, dataArr, setFunc}) => {
                                 value={data} id={data}
                                 checked = { selected === data ? true : false }
                                 onChange={() => {setFunc(data)}}
+                                disabled={disabled ? true: false}
                             />
                             <label htmlFor={data}>{data}</label>
                         </div>

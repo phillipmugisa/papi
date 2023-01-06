@@ -14,6 +14,8 @@ const useFetchNews = (pageNum) => {
 
     const BACKEND_URL = 'https://app.ilazy.net';
 
+    /*eslint-disable */
+
     
     useEffect(() => {
         const getNews = async (pageNum) => {
@@ -56,8 +58,12 @@ const useFetchNews = (pageNum) => {
             .then((response) => {
                 response.json()
                 .then((jsonData) => {
-                    setHasNext(jsonData['next']);
-                    setMaxPages(parseInt(jsonData['count']) / 10)
+                    
+                    let nextLink = jsonData['next'];
+                    let nextPageNum = nextLink.split("&")[0].split("=")[1]
+
+                    setHasNext(nextPageNum);
+                    setMaxPages(Math.floor(parseInt(jsonData['count']) / 10))
                     news ? setNews(data => {
                         data = data.filter(obj => {
                             if (catToShow !== "All" && sourceToShow !== "All")
@@ -84,7 +90,7 @@ const useFetchNews = (pageNum) => {
             })
         }
         updateNews(pageNum)
-    }, [catToShow, sourceToShow, pageNum, maxPages, hasNext, news])
+    }, [catToShow, sourceToShow, pageNum])
 
     return { news, isLoading, err, hasNext, maxPages };
 

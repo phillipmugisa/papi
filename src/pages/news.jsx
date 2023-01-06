@@ -18,7 +18,9 @@ const News = () => {
         observer.current = new IntersectionObserver((entries, observer) => {                
                 if (!isLoading && (entries[0].isIntersecting && hasNext) && pageNum < maxPages - 1) {
                     setTimeout(
-                        setPageNum(prevPageNumber => prevPageNumber + 1),
+                        (() => {
+                            setPageNum(hasNext)
+                        })(),
                         10000
                     )
                 }
