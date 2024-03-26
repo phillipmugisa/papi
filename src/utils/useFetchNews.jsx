@@ -12,7 +12,7 @@ const useFetchNews = (pageNum) => {
         catToShow, sourceToShow,
     } = useContext(SelectorProvider)
 
-    const BACKEND_URL = 'https://app.ilazy.net';
+    const BACKEND_URL = 'https://newsscrapper.mugisa.tech';
 
     /*eslint-disable */
 
